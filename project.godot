@@ -14,6 +14,11 @@ config/name="Free Undertale"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Stats="*res://globals/stats.gd"
+SaveManager="*res://globals/save_manager.gd"
+
 [display]
 
 window/size/viewport_width=640
@@ -52,8 +57,13 @@ move_east={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Environment"
+2d_physics/layer_3="Background"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
 anti_aliasing/screen_space_roughness_limiter/enabled=false
