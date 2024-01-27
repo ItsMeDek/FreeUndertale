@@ -74,7 +74,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snyx2"]
-size = Vector2(38, 58)
+size = Vector2(38, 26)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
@@ -86,4 +86,5 @@ sprite_frames = SubResource("SpriteFrames_8orkv")
 animation = &"move_west"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_snyx2")
