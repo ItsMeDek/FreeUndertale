@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0g4pwhchi4r4"]
+[gd_scene load_steps=6 format=3 uid="uid://c0g4pwhchi4r4"]
 
 [ext_resource type="Texture2D" uid="uid://ci3wacrfni82m" path="res://assets/Export_Tilesets/bg_firstroom.png" id="1_c2p6a"]
 [ext_resource type="PackedScene" uid="uid://daifir3q30tf2" path="res://prefabs/Player.tscn" id="2_chxpc"]
+[ext_resource type="PackedScene" uid="uid://cvi0i4dtu4cp" path="res://prefabs/UndergroundCamera.tscn" id="3_t0r3y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3buhm"]
 texture = ExtResource("1_c2p6a")
@@ -142,3 +143,8 @@ layer_0/tile_data = PackedInt32Array(196617, 851969, 3, 786451, 1048577, 12, 786
 
 [node name="Player" parent="." instance=ExtResource("2_chxpc")]
 position = Vector2(272, 275)
+
+[node name="UndergroundCamera" parent="." node_paths=PackedStringArray("NODE_TO_FOLLOW") instance=ExtResource("3_t0r3y")]
+NODE_TO_FOLLOW = NodePath("../Player")
+LOWER_POSITION_LIMIT = Vector2(270, 250)
+HIGHER_POSITION_LIMIT = Vector2(1000, 300)
