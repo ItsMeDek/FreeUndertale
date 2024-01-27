@@ -1,42 +1,29 @@
-extends StaticBody2D
+extends CharacterBody2D
 
 @export var MOVEMENT_SPEED: float = 180.0
 
 func _ready():
 	$AnimatedSprite2D.animation = "move_south"
 
-func _process(delta):
+func _physics_process(_delta: float):
 	var moving: bool = false
-	var animation_playing: bool = false
 	
-	if Input.is_action_pressed("move_west"):
-		if !animation_playing:
-			$AnimatedSprite2D.play("move_west")
-		self.position.x += -1.0 * delta * MOVEMENT_SPEED
-		
+	var movement_direction: Vector2 = Input.get_vector("move_west", "move_east", "move_north", "move_south")
+	if movement_direction.x > 0.0 and !moving:
+		$AnimatedSprite2D.play("move_east")
 		moving = true
-		animation_playing = true
-	if Input.is_action_pressed("move_east"):
-		if !animation_playing:
-			$AnimatedSprite2D.play("move_east")
-		self.position.x += 1.0 * delta * MOVEMENT_SPEED
-		
+	if movement_direction.x < 0.0 and !moving:
+		$AnimatedSprite2D.play("move_west")
 		moving = true
-		animation_playing = true
-	if Input.is_action_pressed("move_north"):
-		if !animation_playing:
-			$AnimatedSprite2D.play("move_north")
-		self.position.y += -1.0 * delta * MOVEMENT_SPEED
-		
+	if movement_direction.y > 0.0 and !moving:
+		$AnimatedSprite2D.play("move_south")
 		moving = true
-		animation_playing = true
-	if Input.is_action_pressed("move_south"):
-		if !animation_playing:
-			$AnimatedSprite2D.play("move_south")
-		self.position.y += 1.0 * delta * MOVEMENT_SPEED
-		
+	if movement_direction.y < 0.0 and !moving:
+		$AnimatedSprite2D.play("move_north")
 		moving = true
-		animation_playing = true
-	
+
 	if !moving:
 		$AnimatedSprite2D.stop()
+	
+	velocity = movement_direction * MOVEMENT_SPEED
+	move_and_slide()

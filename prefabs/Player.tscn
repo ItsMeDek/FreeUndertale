@@ -25,7 +25,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"move_east",
-"speed": 6.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -42,7 +42,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"move_north",
-"speed": 6.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -59,7 +59,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"move_south",
-"speed": 6.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -70,20 +70,20 @@ animations = [{
 }],
 "loop": false,
 "name": &"move_west",
-"speed": 6.0
+"speed": 4.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snyx2"]
 size = Vector2(38, 58)
 
-[node name="Player" type="StaticBody2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_be0x8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_8orkv")
-animation = &"move_south"
+animation = &"move_west"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_snyx2")
