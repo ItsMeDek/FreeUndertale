@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://fkmqlmhjvs4d"]
+
+[ext_resource type="FontFile" uid="uid://bu3du50l0kifb" path="res://assets/fonts/8-bit-operator/8bitOperatorPlusSC-Bold.ttf" id="1_67wnd"]
+[ext_resource type="Script" path="res://prefabs/PauseMenu.gd" id="1_bon27"]
+
+[node name="PauseMenu" type="VBoxContainer"]
+process_mode = 2
+offset_right = 100.0
+offset_bottom = 232.0
+script = ExtResource("1_bon27")
+
+[node name="OuterMenu1" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(50, 75)
+layout_mode = 2
+
+[node name="InnerMenu1" type="ColorRect" parent="OuterMenu1"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 97.0
+offset_bottom = 72.0
+color = Color(0, 0, 0, 1)
+
+[node name="NameText" type="Label" parent="OuterMenu1/InnerMenu1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 54.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("1_67wnd")
+theme_override_font_sizes/font_size = 15
+text = "CHARA"
+
+[node name="StatText" type="Label" parent="OuterMenu1/InnerMenu1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 19.0
+offset_right = 67.0
+offset_bottom = 82.0
+theme_override_fonts/font = ExtResource("1_67wnd")
+theme_override_font_sizes/font_size = 10
+text = "LV   1
+HP   20/20
+G     0"

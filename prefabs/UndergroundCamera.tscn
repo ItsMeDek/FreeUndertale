@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvi0i4dtu4cp"]
+[gd_scene load_steps=3 format=3 uid="uid://cvi0i4dtu4cp"]
 
 [ext_resource type="Script" path="res://prefabs/UndergroundCamera.gd" id="1_6vyqm"]
+[ext_resource type="PackedScene" uid="uid://fkmqlmhjvs4d" path="res://prefabs/PauseMenu.tscn" id="2_4um8b"]
 
 [node name="UndergroundCamera" type="Camera2D"]
 script = ExtResource("1_6vyqm")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_4um8b")]
+offset_left = -262.0
+offset_top = -201.0
+offset_right = -162.0
+offset_bottom = 31.0
+
+[connection signal="game_paused" from="." to="PauseMenu" method="_on_underground_camera_game_paused"]
+[connection signal="game_unpaused" from="PauseMenu" to="." method="_on_pause_menu_game_unpaused"]
