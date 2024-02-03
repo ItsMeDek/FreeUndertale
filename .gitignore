@@ -2,5 +2,6 @@
 .godot/
 
 assets/Exported_Sounds/*.wav
+assets/Exported_Sounds/*.ogg
 assets/Export_Sprites/*.png
 assets/Export_Tilesets/*.png
