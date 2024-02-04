@@ -15,8 +15,8 @@ func _input(event):
 		emit_signal("game_unpaused")
 
 func rebuild():
-	$OuterMenu1/InnerMenu1/NameText.text = Stats.STATS_DICTIONARY["Name"]
-	$OuterMenu1/InnerMenu1/StatText.text = "LV   %d\nHP   %d/%d\nG     %d" % [Stats.STATS_DICTIONARY["Love"], Stats.STATS_DICTIONARY["Current_HP"], Stats.STATS_DICTIONARY["Max_HP"], Stats.STATS_DICTIONARY["Gold"]]
+	$OuterMenu1/InnerMenu1/NameText.text = Stats.STAT_DICTIONARY["Name"]
+	$OuterMenu1/InnerMenu1/StatText.text = "LV   %d\nHP   %d/%d\nG     %d" % [Stats.STAT_DICTIONARY["Love"], Stats.STAT_DICTIONARY["Current_HP"], Stats.STAT_DICTIONARY["Max_HP"], Stats.STAT_DICTIONARY["Gold"]]
 
 func _on_underground_camera_game_paused():
 	get_tree().paused = true
