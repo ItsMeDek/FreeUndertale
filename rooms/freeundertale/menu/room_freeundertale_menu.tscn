@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://0vdyp76e6t5o"]
+
+[ext_resource type="Script" path="res://rooms/freeundertale/menu/room_freeundertale_menu.gd" id="1_rut2f"]
+
+[node name="RoomFreeundertaleMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rut2f")
+
+[node name="WelcomeText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 13.0
+offset_right = 406.0
+offset_bottom = 36.0
+text = "Welcome to FreeUndertale!"
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 100.0
+offset_right = 426.0
+offset_bottom = 201.0
+
+[node name="FileDialog" type="FileDialog" parent="Buttons"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(393, 163)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="StartButton" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Start from room_area1"
+
+[node name="LoadButton" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Load SAVE (Very experimental)"
+
+[node name="ExitButton" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="file_selected" from="Buttons/FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Buttons/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cddf3eqhs1y4i"]
+
+[ext_resource type="PackedScene" uid="uid://daifir3q30tf2" path="res://prefabs/Player.tscn" id="1_ihmc2"]
+[ext_resource type="PackedScene" uid="uid://cvi0i4dtu4cp" path="res://prefabs/UndergroundCamera.tscn" id="2_tjbl3"]
+
+[node name="RoomFreeundertaleGenericTemplate" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ihmc2")]
+
+[node name="UndergroundCamera" parent="." node_paths=PackedStringArray("NODE_TO_FOLLOW") instance=ExtResource("2_tjbl3")]
+NODE_TO_FOLLOW = NodePath("../Player")
