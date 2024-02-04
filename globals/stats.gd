@@ -1,6 +1,6 @@
 extends Node
 
-var STATS_DICTIONARY: Dictionary = {
+var STAT_DICTIONARY: Dictionary = {
 	"Name": "Chara",
 	"Love": 1,
 	"Current_HP": 20,
@@ -16,10 +16,10 @@ var STATS_DICTIONARY: Dictionary = {
 	"PhoneItem_Array1": [0, 0, 0, 0, 0, 0, 0, 0],
 	"PhoneItem_Array2": [0, 0, 0, 0, 0, 0, 0, 0],
 	"Equipped_Weapon": 0,
-	"Equired_Armor": 0,
-	"Plot": 0,
-	"Menu choice": [0, 0, 0],
+	"Equipped_Armor": 0,
+	"Plot": 0.0,
+	"Menu_choice": [1, 1, 1],
 	"Background_Song": 0,
-	"Room": 6,
+	"RoomID": 4,
 	"Elapsed_Seconds": 0
 }
