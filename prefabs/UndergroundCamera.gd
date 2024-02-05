@@ -8,6 +8,16 @@ signal game_paused
 
 var can_pause: bool = true
 
+func fadein():
+	$AnimationPlayer.play("camera_fadein")
+
+func fadeout():
+	$AnimationPlayer.play("camera_fadeout")
+
+func _ready():
+	$Fadeout.show()
+	fadein()
+
 func _process(_delta: float):
 	position.x = clamp(NODE_TO_FOLLOW.position.x, LOWER_POSITION_LIMIT.x, HIGHER_POSITION_LIMIT.x)
 	position.y = clamp(NODE_TO_FOLLOW.position.y, LOWER_POSITION_LIMIT.y, HIGHER_POSITION_LIMIT.y)
@@ -20,3 +30,6 @@ func _input(event):
 func _on_pause_menu_game_unpaused():
 	get_tree().paused = false
 	can_pause = false
+
+func _on_teleport_trigger_teleport():
+	fadeout()

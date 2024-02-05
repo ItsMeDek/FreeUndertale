@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://jk1ms7wy7llu"]
+
+[ext_resource type="Script" path="res://prefabs/TeleportTrigger.gd" id="1_7dl2j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6613"]
+
+[node name="TeleportTrigger" type="Area2D"]
+position = Vector2(1, 0)
+script = ExtResource("1_7dl2j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m6613")
+
+[node name="TeleportTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="teleport" from="." to="." method="_on_teleport"]
+[connection signal="timeout" from="TeleportTimer" to="." method="_on_teleport_timer_timeout"]
