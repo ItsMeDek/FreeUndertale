@@ -59,7 +59,7 @@ func load_data(save_file: FileAccess):
 	for i in range(8, 16):
 		Stats.STAT_DICTIONARY["PhoneItem_Array2"][i - 8] = phoneitem_array[i]
 	
-	# TODO: Implement save file loading
+	# TODO: Implement flag loading
 	var flags: Array[int]
 	flags.resize(512)
 	for i in range(29, 541):
@@ -85,7 +85,6 @@ func load_data(save_file: FileAccess):
 			Stats.STAT_DICTIONARY[stat] = file_contents[iteration].replace(' ', '').to_int()
 			iteration += 1
 	
-	print(Stats.STAT_DICTIONARY)
 	change_room(RoomRegistry.ROOM_DICTIONARY[Stats.STAT_DICTIONARY["RoomID"]])
 	save_file.close()
 
