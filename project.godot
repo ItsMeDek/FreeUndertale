@@ -18,9 +18,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Stats="*res://globals/stats.gd"
-SaveManager="*res://globals/save_manager.gd"
-RoomRegistry="*res://globals/room_registry.gd"
+RoomRegistry="*res://globals/RoomRegistry.tscn"
+SaveManager="*res://globals/SaveManager.tscn"
+Stats="*res://globals/Stats.tscn"
 
 [display]
 

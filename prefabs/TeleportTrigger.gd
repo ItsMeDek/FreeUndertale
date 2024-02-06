@@ -12,7 +12,7 @@ func _on_body_entered(body: Node2D):
 		emit_signal("teleport")
 
 func _on_teleport_timer_timeout():
-	SaveManager.change_room(RoomRegistry.ROOM_DICTIONARY[TELEPORT_SCENE_ID])
+	SaveManager.change_room(TELEPORT_SCENE_ID)
 
 func _on_teleport():
 	$TeleportTimer.start()
