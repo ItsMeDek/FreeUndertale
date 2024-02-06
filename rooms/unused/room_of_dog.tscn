@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dp8xbuys7yg3b"]
+
+[ext_resource type="Texture2D" uid="uid://dexf6yvr6bucl" path="res://assets/Export_Sprites/spr_tobdog_sleep_trash_0.png" id="1_2vk0d"]
+[ext_resource type="Texture2D" uid="uid://6iaxusx07jmk" path="res://assets/Export_Sprites/spr_tobdogl_0.png" id="1_276f4"]
+[ext_resource type="Script" path="res://rooms/unused/room_of_dog.gd" id="1_g2uki"]
+[ext_resource type="Texture2D" uid="uid://bbccbr1jwxddv" path="res://assets/Export_Sprites/spr_tobdogl_1.png" id="2_laetn"]
+[ext_resource type="Texture2D" uid="uid://dyseqttksuylx" path="res://assets/Export_Sprites/spr_tobdog_sleep_trash_1.png" id="2_wdq4t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xgvol"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_276f4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_laetn")
+}],
+"loop": true,
+"name": &"dance_of_dog",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2vk0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wdq4t")
+}],
+"loop": true,
+"name": &"sigh_of_dog",
+"speed": 1.0
+}]
+
+[node name="RoomOfDog" type="Node"]
+script = ExtResource("1_g2uki")
+
+[node name="TheDog" type="AnimatedSprite2D" parent="."]
+position = Vector2(328, 202)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_xgvol")
+animation = &"dance_of_dog"
+frame_progress = 0.838672
