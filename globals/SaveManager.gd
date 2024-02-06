@@ -85,13 +85,12 @@ func load_data(save_file: FileAccess):
 			Stats.STAT_DICTIONARY[stat] = file_contents[iteration].replace(' ', '').to_int()
 			iteration += 1
 	
-	var room_ID
-	
 	change_room(Stats.STAT_DICTIONARY["RoomID"])
 	save_file.close()
 
 func change_room(room_ID: int):
 	Stats.STAT_DICTIONARY["RoomID"] = room_ID
+	
 	var room = RoomRegistry.ROOM_DICTIONARY[room_ID]
 	var dogcheck_enabled: bool = RoomRegistry.ENABLE_DOGCHECK
 	
