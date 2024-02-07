@@ -85,22 +85,22 @@ func load_data(save_file: FileAccess):
 			Stats.STAT_DICTIONARY[stat] = file_contents[iteration].replace(' ', '').to_int()
 			iteration += 1
 	
-	change_room(Stats.STAT_DICTIONARY["RoomID"])
+	var dogcheck_enabled: bool = RoomRegistry.ENABLE_DOGCHECK
+	var room_dogchecked: bool = RoomRegistry.ROOM_DICTIONARY[Stats.STAT_DICTIONARY["RoomID"]].dogchecked
+	
+	if dogcheck_enabled and room_dogchecked:
+		change_room(326)
+	else:
+		change_room(Stats.STAT_DICTIONARY["RoomID"])
 	save_file.close()
 
 func change_room(room_ID: int):
 	Stats.STAT_DICTIONARY["RoomID"] = room_ID
 	
 	var room = RoomRegistry.ROOM_DICTIONARY[room_ID]
-	var dogcheck_enabled: bool = RoomRegistry.ENABLE_DOGCHECK
 	
 	var room_name: String = room.name
 	var room_type: String = room.type
-	var room_dogchecked: bool = room.dogchecked
-	
-	if room_dogchecked and dogcheck_enabled:
-		room_name = "room_of_dog"
-		room_type = "unused"
 	
 	var room_path: String = "res://rooms/%s/%s.tscn" % [room_type, room_name]	
 	get_tree().change_scene_to_file(room_path)
