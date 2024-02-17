@@ -18,7 +18,7 @@ var STAT_DICTIONARY: Dictionary = {
 	"Equipped_Weapon": 0,
 	"Equipped_Armor": 0,
 	"Plot": 0.0,
-	"Menu_choice": [1, 1, 1],
+	"Menu_Choice": [1, 1, 1],
 	"Background_Song": 0,
 	"RoomID": 4,
 	"Elapsed_Seconds": 0

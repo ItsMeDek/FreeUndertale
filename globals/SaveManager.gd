@@ -72,7 +72,7 @@ func load_data(save_file: FileAccess):
 			continue
 		if stat == "Plot":
 			iteration += 512
-		if stat == "Menu_choice":
+		if stat == "Menu_Choice":
 			Stats.STAT_DICTIONARY[stat] = [file_contents[iteration].replace(' ', '').to_int(), file_contents[iteration + 1].replace(' ', '').to_int(), file_contents[iteration + 2].replace(' ', '').to_int()]
 			iteration += 3
 		elif typeof(Stats.STAT_DICTIONARY[stat]) == TYPE_STRING:
