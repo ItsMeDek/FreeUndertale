@@ -31,6 +31,7 @@ title = "Open a File"
 initial_position = 1
 size = Vector2i(393, 163)
 auto_translate = false
+ok_button_text = "Open"
 file_mode = 0
 access = 2
 show_hidden_files = true
@@ -42,7 +43,7 @@ text = "Start from room_area1"
 
 [node name="LoadButton" type="Button" parent="Buttons"]
 layout_mode = 2
-text = "Load SAVE (Very experimental)"
+text = "Load SAVE"
 
 [node name="ExitButton" type="Button" parent="Buttons"]
 layout_mode = 2

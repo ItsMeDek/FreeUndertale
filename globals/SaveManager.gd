@@ -53,55 +53,45 @@ func save_data(save_file: FileAccess):
 	layout.close()
 	save_file.close()
 
-# HEADS UP: This code is so broken, hacky and unmaintainable that it requires a full rewrite.
-# If you find a bug related to loading, don't modify this function unless you want your life to turn into hell.
 func load_data(save_file: FileAccess):
-	var file_contents: PackedStringArray = save_file.get_as_text().split('\r\n')
+	var layout: FileAccess = query_preferred_layout()
+	var layout_array: PackedStringArray = layout.get_as_text().replace("/", "").split('\n')
 	
-	var phoneitem_array: Array[int] = [0]
-	phoneitem_array.resize(16)
-	for i in range(12, 28):
-		phoneitem_array[i - 12] = file_contents[i].replace(' ', '').to_int()
-	
-	for i in range(0, 8):	
-		Stats.STAT_DICTIONARY["PhoneItem_Array1"][i] = phoneitem_array[i]
-	
-	for i in range(8, 16):
-		Stats.STAT_DICTIONARY["PhoneItem_Array2"][i - 8] = phoneitem_array[i]
-	
-	# TODO: Implement flag loading
-	var flags: Array[int]
-	flags.resize(512)
-	for i in range(29, 541):
-		flags[i - 29] = file_contents[i].replace(' ', '').to_int()
+	var save_file_array: PackedStringArray = save_file.get_as_text().split('\r\n')
 	
 	var iteration: int = 0
-	for stat in Stats.STAT_DICTIONARY.keys():
-		if stat.find("PhoneItem_Array") != -1:
-			iteration += 8
-			continue
-		if stat == "Plot":
-			iteration += 512
-		if stat == "Menu_Choice":
-			Stats.STAT_DICTIONARY[stat] = [file_contents[iteration].replace(' ', '').to_int(), file_contents[iteration + 1].replace(' ', '').to_int(), file_contents[iteration + 2].replace(' ', '').to_int()]
-			iteration += 3
-		elif typeof(Stats.STAT_DICTIONARY[stat]) == TYPE_STRING:
-			Stats.STAT_DICTIONARY[stat] = file_contents[iteration].replace(' ', '')
-			iteration += 1
-		elif typeof(Stats.STAT_DICTIONARY[stat]) == TYPE_FLOAT:
-			Stats.STAT_DICTIONARY[stat] = file_contents[iteration].replace(' ', '').to_float()
-			iteration += 1
+	for line in layout_array:
+		if line == "":
+			pass
+		elif line.find("[") != -1:
+			var line_elements: PackedStringArray = line.replace("]", "").split("[")
+			
+			if line_elements[0].find("Flag") != -1:
+				# TODO
+				pass
+			else:
+				var array: Array = Stats.STAT_DICTIONARY[line_elements[0]]
+				array[int(line_elements[1])] = save_file_array[iteration]
 		else:
-			Stats.STAT_DICTIONARY[stat] = file_contents[iteration].replace(' ', '').to_int()
-			iteration += 1
+			var numeric_value = str_to_var(save_file_array[iteration])
+			if numeric_value != null:
+				Stats.STAT_DICTIONARY[line] = numeric_value
+			else:
+				Stats.STAT_DICTIONARY[line] = save_file_array[iteration]
+
+		iteration += 1
+	
+	var roomid: int = int(Stats.STAT_DICTIONARY["RoomID"])
 	
 	var dogcheck_enabled: bool = RoomRegistry.ENABLE_DOGCHECK
-	var room_dogchecked: bool = RoomRegistry.ROOM_DICTIONARY[Stats.STAT_DICTIONARY["RoomID"]].dogchecked
+	var room_dogchecked: bool = RoomRegistry.ROOM_DICTIONARY[roomid].dogchecked
 	
 	if dogcheck_enabled and room_dogchecked:
 		change_room(326)
 	else:
-		change_room(Stats.STAT_DICTIONARY["RoomID"])
+		change_room(roomid)
+	
+	layout.close()
 	save_file.close()
 
 func change_room(room_ID: int):
