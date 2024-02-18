@@ -46,7 +46,7 @@ func save_data(save_file: FileAccess):
 			buffer += Stats.STAT_DICTIONARY[line.replace("/", "")]
 		else:
 			buffer += str(Stats.STAT_DICTIONARY[line]) + " "
-		buffer += "\n"
+		buffer += "\r\n"
 	
 	save_file.store_string(buffer)
 	
