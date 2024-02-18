@@ -1,8 +1,21 @@
 extends Node
 
+@export var PREFERRED_LAYOUT = "undertale_layout"
+
 func _ready():
 	print("Saving a test file!")
 	save("test")
+
+func query_preferred_layout() -> FileAccess:
+	var layout_directory: DirAccess = DirAccess.open("res://layouts")
+	var layout_filenames: PackedStringArray = layout_directory.get_files()
+	var file: FileAccess
+	
+	for filename in layout_filenames:
+		if filename == PREFERRED_LAYOUT + ".txt":
+			file = FileAccess.open("res://layouts/" + filename, FileAccess.READ)
+		
+	return file
 
 func save(filename: String):
 	var save_file: FileAccess = FileAccess.open("user://" + filename, FileAccess.WRITE)
@@ -13,34 +26,31 @@ func load(filename: String):
 	load_data(save_file)
 
 func save_data(save_file: FileAccess):
-	# First we save the player name WITHOUT a space following it (Because Undertale does that for some reason)
-	# Then, we construct a dictionary identical to the main stats dictionary, but without the Name member
-	save_file.store_string(Stats.STAT_DICTIONARY["Name"] + '\r\n')
-	var stats2 = Stats.STAT_DICTIONARY.duplicate()
-	stats2.erase("Name")
-	# Afterwards we create a buffer which stores the data to be saved
+	var layout: FileAccess = query_preferred_layout()
+	var layout_array: PackedStringArray = layout.get_as_text().split('\n')
+
 	var buffer: String = ""
-	# Next, we start iterating over every value in the newly constructed stats2 dictionary
-	var iteration: int = 0
-	for stat in stats2.values():
-		iteration += 1
-		# We save arrays by storing every member in a separate line
-		if typeof(stat) == TYPE_ARRAY:
-			for member in stat:
-				iteration += 1
-				buffer += str(member) + ' \r\n'
-		# We save every other member in a separate line
+	for line in layout_array:
+		if line == "":
+			continue
+		elif line.find("[") != -1:
+			var line_elements: PackedStringArray = line.replace("]", "").split("[")
+			
+			if line_elements[0].find("Flag") != -1:
+				# TODO
+				buffer += "69" + " "
+			else:
+				var array: Array = Stats.STAT_DICTIONARY[line_elements[0]]
+				buffer += str(array[int(line_elements[1])]) + " "
+		elif line.find("/") != -1:
+			buffer += Stats.STAT_DICTIONARY[line.replace("/", "")]
 		else:
-			buffer += str(stat) + ' \r\n'
-		# In Undertale, flags are saved on lines 31-543
-		# Currently, the flags are stubs. In the future, we'll implement those flags one by one.
-		if iteration == 30:
-			print("TODO: Implement proper flag saving!")
-			for i in range(0, 512):
-				buffer += str(i) + '\r\n'
-	# Finally, we delete the last line break, copy the buffer into the save file and close the save file
-	buffer = buffer.erase(buffer.length() - 1)
+			buffer += str(Stats.STAT_DICTIONARY[line]) + " "
+		buffer += "\n"
+	
 	save_file.store_string(buffer)
+	
+	layout.close()
 	save_file.close()
 
 # HEADS UP: This code is so broken, hacky and unmaintainable that it requires a full rewrite.
